@@ -17,7 +17,7 @@ Listas
 Imagens
 Organização de conteúdo com header, nav, main, section e footer
 Estilização utilizando CSS
-- Tecnologias utilizadas
+- Tecnologias utilizadas:
 HTML5
 CSS3
 - Objetivos
