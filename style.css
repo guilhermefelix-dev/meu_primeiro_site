@@ -1,0 +1,32 @@
+body {
+    background-color:white;
+    font-family: arial, sans-serif;
+}
+
+h1 {
+    color:black;
+    font-size: 50px;
+    text-align: center;
+    margin: 20px;
+    border:3px solid black;
+    border-radius: 10px;
+    padding:10px;
+    width: 50%;
+    margin:auto;
+}
+
+h2 {
+    color: black;
+    font-size: 30px;
+    text-align: left;
+}
+
+p, ul {
+    color: rgb(0, 0, 0);
+    font-size: 20px;
+    text-align: justify;
+}
+
+p{
+    margin:12px
+}
