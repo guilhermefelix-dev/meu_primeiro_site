@@ -1,32 +1,292 @@
+/* ==========================================================
+   VARIÁVEIS DE COR (:root)
+   Aqui a gente define as cores do site uma única vez.
+   Depois é só usar var(--nome-da-variavel) em qualquer lugar.
+   Isso facilita muito se um dia você quiser trocar a paleta toda.
+   ========================================================== */
+:root {
+  --cor-fundo: #f7f7f5;         /* fundo geral da página, um branco levemente acinzentado */
+  --cor-fundo-secao: #ffffff;   /* fundo das "caixas" de conteúdo */
+  --cor-texto: #2e2e2e;         /* cor principal do texto, quase preto */
+  --cor-texto-suave: #5c5c5c;   /* texto secundário, mais claro */
+  --cor-primaria: #3a5a78;      /* azul acinzentado, usado em títulos e destaques */
+  --cor-primaria-escura: #294156; /* versão mais escura, usada no hover dos links */
+  --cor-borda: #e2e2df;         /* bordas e linhas divisórias, bem discretas */
+
+  --fonte-principal: 'Segoe UI', Arial, sans-serif;
+  --espacamento-secao: 2.5rem;
+  --raio-borda: 10px;
+}
+
+/* ==========================================================
+   RESET BÁSICO
+   Navegadores diferentes aplicam margens/paddings padrão
+   diferentes. Zerando tudo, a gente começa do zero e evita
+   surpresas de espaçamento.
+   ========================================================== */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box; /* faz padding e borda não aumentarem o tamanho total do elemento */
+}
+
 body {
-    background-color:white;
-    font-family: arial, sans-serif;
+  font-family: var(--fonte-principal);
+  background-color: var(--cor-fundo);
+  color: var(--cor-texto);
+  line-height: 1.6; /* espaço entre linhas do texto, melhora a leitura */
 }
 
-h1 {
-    color:black;
-    font-size: 50px;
+/* ==========================================================
+   HEADER (cabeçalho)
+   ========================================================== */
+header {
+  position: relative; /* isso cria uma "referência" para as imagens se posicionarem dentro do header */
+  background-color: var(--cor-primaria);
+  color: #ffffff;
+  text-align: center;
+  padding: 3rem 6.5rem; /* mais espaço nas laterais, pra sobrar lugar pras fotos */
+}
+
+header h1 {
+  font-size: 2rem;
+  margin-bottom: 1rem;
+}
+
+header p {
+  max-width: 600px;
+  margin: 0.5rem auto;
+  color: #e8eef3; /* branco levemente acinzentado, mais suave que branco puro */
+}
+
+header img {
+  position: absolute;     /* tira a imagem do fluxo normal do texto */
+  top: 50%;
+  transform: translateY(-50%); /* centraliza verticalmente em relação ao header */
+  width: 90px;             /* foto bem menor que antes */
+  height: auto;             /* mantém a proporção da imagem original */
+  border-radius: var(--raio-borda);
+  border: 3px solid #ffffff;
+}
+
+header img:first-of-type {
+  left: 1.5rem; /* gruda a primeira foto na esquerda */
+}
+
+header img:last-of-type {
+  right: 1.5rem; /* gruda a segunda foto na direita */
+}
+
+/* Grupo de fotos "espalhadas" (usada na seção de gostos)
+   Para usar: envolva as imagens com <div class="galeria"> ... </div> */
+.galeria {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+  margin-top: 2rem;
+}
+
+.galeria img {
+  width: 150px;
+  height: auto;
+  border: 6px solid #ffffff; /* moldura estilo "polaroid" */
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  border-radius: 4px;
+  transition: transform 0.25s ease, box-shadow 0.25s ease; /* deixa o hover suave */
+}
+
+/* Gira cada foto pra um lado diferente, dá o efeito "espalhado" */
+.galeria img:nth-child(odd) {
+  transform: rotate(-5deg);
+}
+
+.galeria img:nth-child(even) {
+  transform: rotate(5deg);
+}
+
+.galeria img:hover {
+  transform: rotate(0deg) scale(1.08); /* endireita e aumenta um pouco ao passar o mouse */
+  box-shadow: 0 8px 18px rgba(0, 0, 0, 0.22);
+  z-index: 2;
+}
+
+/* ==========================================================
+   NAVEGAÇÃO (nav)
+   ========================================================== */
+nav {
+  background-color: var(--cor-primaria-escura);
+  position: sticky; /* faz o menu "grudar" no topo quando rola a página */
+  top: 0;
+}
+
+nav ul {
+  list-style: none; /* tira as bolinhas da lista */
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+nav ul li a {
+  display: block;
+  padding: 1rem 1.5rem;
+  color: #ffffff;
+  text-decoration: none; /* tira o sublinhado padrão do link */
+  transition: background-color 0.2s ease; /* deixa o hover suave, sem ser brusco */
+}
+
+nav ul li a:hover {
+  background-color: var(--cor-primaria);
+}
+
+/* ==========================================================
+   CONTEÚDO PRINCIPAL (main / sections)
+   ========================================================== */
+main {
+  max-width: 800px;
+  margin: 0 auto; /* centraliza o conteúdo na página */
+  padding: 0 1.5rem;
+}
+
+section {
+  background-color: var(--cor-fundo-secao);
+  margin-top: var(--espacamento-secao);
+  padding: 2rem;
+  border-radius: var(--raio-borda);
+  border: 1px solid var(--cor-borda);
+}
+
+section h2 {
+  color: var(--cor-primaria);
+  margin-bottom: 1rem;
+  border-bottom: 2px solid var(--cor-borda);
+  padding-bottom: 0.5rem;
+}
+
+section p {
+  margin-bottom: 1rem;
+  color: var(--cor-texto-suave);
+}
+
+section ul {
+  padding-left: 1.3rem; /* mantém as bolinhas da lista, mas com um respiro */
+}
+
+section li {
+  margin-bottom: 0.5rem;
+  color: var(--cor-texto-suave);
+}
+
+section img {
+  border-radius: var(--raio-borda);
+}
+
+section .galeria {
+  margin-top: 1.5rem;
+}
+
+/* ==========================================================
+   SEÇÃO DE PROJETOS
+   Transforma cada <li> em um "card" separado, em vez de
+   uma lista com bolinhas.
+   ========================================================== */
+#projetos ul {
+  list-style: none; /* tira as bolinhas, já que cada item vira um card */
+  padding-left: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem; /* espaço entre os cards */
+}
+
+#projetos li {
+  background-color: var(--cor-fundo);
+  border: 1px solid var(--cor-borda);
+  border-radius: var(--raio-borda);
+  padding: 1rem 1.25rem;
+  margin-bottom: 0; /* o gap do flex já cuida do espaçamento */
+}
+
+#projetos li strong {
+  color: var(--cor-primaria); /* destaca o nome do projeto */
+}
+
+#projetos li span {
+  display: inline-block;
+  background-color: var(--cor-borda);
+  color: var(--cor-texto-suave);
+  font-size: 0.75rem;
+  padding: 0.15rem 0.6rem;
+  border-radius: 999px; /* deixa bem arredondado, tipo uma "etiqueta" */
+  margin-left: 0.4rem;
+}
+
+#projetos li a {
+  color: var(--cor-primaria);
+  font-weight: 600;
+  text-decoration: none;
+}
+
+#projetos li a:hover {
+  color: var(--cor-primaria-escura);
+  text-decoration: underline;
+}
+
+/* ==========================================================
+   RODAPÉ (footer)
+   ========================================================== */
+footer {
+  margin-top: var(--espacamento-secao);
+  background-color: var(--cor-primaria-escura);
+  color: #ffffff;
+  text-align: center;
+  padding: 2rem 1.5rem;
+}
+
+footer ul {
+  list-style: none;
+  margin: 1rem 0;
+}
+
+footer li {
+  margin-bottom: 0.4rem;
+}
+
+footer a {
+  color: #cfe0ec;
+  text-decoration: underline;
+}
+
+footer a:hover {
+  color: #ffffff;
+}
+
+/* ==========================================================
+   RESPONSIVIDADE (telas pequenas, celular)
+   ========================================================== */
+@media (max-width: 600px) {
+  nav ul {
+    flex-direction: column; /* empilha os links do menu em telas estreitas */
     text-align: center;
-    margin: 20px;
-    border:3px solid black;
-    border-radius: 10px;
-    padding:10px;
-    width: 50%;
-    margin:auto;
-}
+  }
 
-h2 {
-    color: black;
-    font-size: 30px;
-    text-align: left;
-}
+  header {
+    padding: 2rem 1.5rem; /* tira o espaço extra das laterais que era pra caber as fotos */
+  }
 
-p, ul {
-    color: rgb(0, 0, 0);
-    font-size: 20px;
-    text-align: justify;
-}
+  header h1 {
+    font-size: 1.5rem;
+  }
 
-p{
-    margin:12px
+  header img {
+    position: static;       /* volta ao fluxo normal do texto, uma embaixo da outra */
+    transform: none;
+    display: inline-block;
+    width: 70px;
+    margin: 1rem 0.5rem 0;
+  }
+
+  section {
+    padding: 1.5rem;
+  }
 }
